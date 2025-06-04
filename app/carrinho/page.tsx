@@ -550,8 +550,12 @@ const createPixTransaction = async () => {
 
         <div className="bg-white p-4 rounded-lg">
           <p className="text-black font-bold mb-4">
-            Valor: R$ {pixData.amount.toFixed(2)}
-          </p>
+               Valor:{" "}
+               {(pixData.amount / 100).toLocaleString("pt-BR", {
+                style: "currency",
+               currency: "BRL",
+               })}
+                  </p>
 
           {pixData.copyPasteCode ? (
             <div className="bg-black text-white p-3 rounded-lg flex items-center justify-between">
