@@ -18,7 +18,18 @@ export async function POST(req: Request) {
     }
 
     const auth = 'Basic ' + Buffer.from(`${publicKey}:${secretKey}`).toString('base64');
+    
+    let amountNumber: number;
 
+    if (typeof amount === 'string') {
+      amountNumber = Number(amount.replace(',', '.'));
+    } else if (typeof amount === 'number') {
+      amountNumber = amount;
+    } else {
+      return NextResponse.json({ error: "Valor inválido para amount" }, { status: 400 });
+    }
+
+    
     // ✅ Conversão para centavos (inteiro)
     const parsedAmount = Math.round(Number(amount) * 100);
 
