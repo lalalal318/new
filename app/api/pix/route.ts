@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     const auth = 'Basic ' + Buffer.from(`${publicKey}:${secretKey}`).toString('base64');
 
     // ✅ Conversão para centavos (inteiro)
-    const parsedAmount = parseInt(amount);
+    const parsedAmount = Math.round(Number(amount) * 100);
 
    const payload = {
    amount: parsedAmount,
