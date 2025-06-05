@@ -532,13 +532,16 @@ const createPixTransaction = async () => {
           )}
         </div>
       </main>
-
-      {showPixPopup && (
+ <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+    <div className="bg-black border border-white/20 rounded-lg max-w-md w-full p-6 relative max-h-[80vh] overflow-y-auto">
+      {/* Botão de fechar */}
+    {showPixPopup && (
   <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-    <div className="bg-black border border-white/20 rounded-lg max-w-md w-full p-6 relative">
+    <div className="bg-black border border-white/20 rounded-lg max-w-md w-full p-6 relative max-h-[80vh] overflow-y-auto">
+      {/* Botão de fechar */}
       <button
         onClick={() => setShowPixPopup(false)}
-        className="absolute top-4 right-4"
+        className="absolute top-4 right-4 hover:text-red-500"
       >
         <X className="h-5 w-5 text-white" />
       </button>
