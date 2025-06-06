@@ -536,49 +536,46 @@ const createPixTransaction = async () => {
     <div className="bg-black border border-white/20 rounded-lg max-w-md w-full p-6 relative max-h-[80vh] overflow-y-auto">
       {/* Botão de fechar */}
     {showPixPopup && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
-    <div className="relative w-full max-w-md bg-black border border-white/20 rounded-lg p-6 shadow-lg max-h-[80vh] overflow-y-auto">
-      
+  <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+    <div className="bg-black border border-white/20 rounded-lg max-w-md w-full p-6 relative max-h-[80vh] overflow-y-auto">
       {/* Botão de fechar */}
       <button
         onClick={() => setShowPixPopup(false)}
-        className="absolute top-4 right-4 text-white hover:text-red-500"
-        aria-label="Fechar popup"
+        className="absolute top-4 right-4 hover:text-red-500"
       >
-        <X className="h-5 w-5" />
+        <X className="h-5 w-5 text-white" />
       </button>
 
-      <div className="text-center space-y-4 mt-2">
-        <h2 className="text-2xl font-bold text-white">Pagamento via PIX</h2>
+      <div className="text-center space-y-4">
+        <h2 className="text-2xl font-bold text-white">
+          Pagamento via PIX
+        </h2>
 
-        <div className="bg-white p-4 rounded-lg space-y-3">
-          <p className="text-black font-bold">
-            Valor:{" "}
-            {(pixData.amount / 100).toLocaleString("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-            })}
-          </p>
+        <div className="bg-white p-4 rounded-lg">
+          <p className="text-black font-bold mb-4">
+               Valor:{" "}
+               {(pixData.amount / 100).toLocaleString("pt-BR", {
+                style: "currency",
+               currency: "BRL",
+               })}
+                  </p>
 
           {pixData.copyPasteCode ? (
-            <div className="bg-black text-white p-3 rounded-lg flex flex-col sm:flex-row sm:items-center gap-2">
-              <code className="text-xs break-all flex-1">
+            <div className="bg-black text-white p-3 rounded-lg flex items-center justify-between">
+              <code className="text-xs overflow-x-auto break-all flex-1">
                 {pixData.copyPasteCode}
               </code>
               <Button
                 size="sm"
                 variant="ghost"
                 onClick={() => {
-                  navigator.clipboard
-                    .writeText(pixData.copyPasteCode)
-                    .then(() =>
-                      alert("Código Pix copiado para a área de transferência!")
-                    )
-                    .catch(() =>
-                      alert("Não foi possível copiar o código Pix.")
-                    );
+                  if (pixData?.copyPasteCode) {
+                    navigator.clipboard.writeText(pixData.copyPasteCode)
+                      .then(() => alert("Código Pix copiado para a área de transferência!"))
+                      .catch(() => alert("Não foi possível copiar o código Pix."));
+                  }
                 }}
-                className="text-white hover:text-green-400"
+                className="ml-2"
               >
                 <Copy className="h-4 w-4" />
               </Button>
@@ -589,10 +586,8 @@ const createPixTransaction = async () => {
             </div>
           )}
         </div>
-      </div>
-    </div>
-  </div>
-)}
+
+
 
 
         {paymentStatus === "pending" && (
